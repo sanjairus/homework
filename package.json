@@ -57,7 +57,8 @@
     "coverageDirectory": "../coverage",
     "moduleNameMapper": {
       "^@database/(.*)$": "<rootDir>/src/database/$1",
-      "^@core/(.*)$": "<rootDir>/src/core/$1"
+      "^@core/(.*)$": "<rootDir>/src/core/$1",
+      "^@appointment/(.*)$": "<rootDir>/src/appointment/$1"
     }
   }
 }
