@@ -1,4 +1,8 @@
 node_modules
 dist
 build
-.env.*
+.env.development
+.env.sit
+.env.uat
+.env.stg
+.env.prd
