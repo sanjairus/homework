@@ -66,8 +66,13 @@ class AppointmentService {
   private calculateMillisExtension(peopleAhead: number) {
     console.log("Start of AppointmentService: calculateTimeExtension");
 
+    // amount of time a unit of work needs to be processed
     const baseMinutes: number = 5;
-    const growthRate: number = 1.3;
+
+    // value between 1 and 1.5, so that things don't escalate too quickly
+    const multiplier: number = 1.3;
+
+    // maximum amount of time that we can use as an extension (we can change this to whatever is realistic relative to the task)
     const maxMinutes: number = 60;
 
     if (peopleAhead < 0) {
@@ -85,7 +90,7 @@ class AppointmentService {
     const baseMs = MS_PER_MINUTE * baseMinutes;
     const maxMs = MS_PER_MINUTE * maxMinutes;
 
-    const extension = baseMs * Math.pow(growthRate, peopleAhead);
+    const extension = baseMs * Math.pow(multiplier, peopleAhead);
 
     console.log("End of AppointmentService: calculateTimeExtension");
 
