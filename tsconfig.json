@@ -2,7 +2,7 @@
   "include": ["src/**/*.ts", "tests/**/*.ts", "**/*.spec.ts"],
   // Visit https://aka.ms/tsconfig to read more about this file
   "compilerOptions": {
-    "module": "commonjs",
+    "module": "node16",
     "moduleResolution": "node16",
     "isolatedModules": true,
 
