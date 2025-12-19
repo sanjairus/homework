@@ -1,3 +1,4 @@
+import { Appointment } from "@appointment/appointment.entity";
 import { DataSource, DataSourceOptions } from "typeorm";
 
 async function initDatasource(): Promise<DataSource> {
@@ -20,7 +21,7 @@ async function initDatasource(): Promise<DataSource> {
     database: name,
     synchronize: false,
     logging: true,
-    entities: [],
+    entities: [Appointment],
     subscribers: [],
     migrations: [],
   };
