@@ -13,4 +13,13 @@ export class Appointment {
 
   @Column()
   isConfirmed!: boolean;
+
+  @Column()
+  customerName!: string;
+
+  @Column()
+  customerEmail!: string;
+
+  @Column()
+  customerPhone!: string;
 }
