@@ -24,7 +24,8 @@
     "experimentalDecorators": true,
     "paths": {
       "@database/*": ["src/database/*"],
-      "@core/*": ["src/core/*"]
+      "@core/*": ["src/core/*"],
+      "@appointment/*": ["src/appointment/*"],
     }
   }
 }
