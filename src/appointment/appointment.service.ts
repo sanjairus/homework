@@ -1,6 +1,7 @@
 import { DataSource, MongoRepository } from "typeorm";
 import { Appointment } from "@appointment/appointment.entity";
 import { randomInt } from "node:crypto";
+import { CreateAppointmentParams } from "@appointment/appointment.type";
 
 class AppointmentService {
   datasource: DataSource;
@@ -31,7 +32,12 @@ class AppointmentService {
     return appointments;
   }
 
-  async createAppointment(schedule: Date) {
+  async createAppointment({
+    schedule,
+    customerName,
+    customerEmail,
+    customerPhone,
+  }: CreateAppointmentParams) {
     console.log("Start of AppointmentService: createAppointment");
 
     const appointment = new Appointment();
@@ -41,6 +47,10 @@ class AppointmentService {
 
       return num.toString().padStart(4, "0");
     };
+
+    appointment.customerEmail = customerEmail;
+    appointment.customerName = customerName;
+    appointment.customerPhone = customerPhone;
 
     appointment.pin = generatePin();
     appointment.schedule = schedule;
