@@ -2,6 +2,7 @@ import { DataSource, MongoRepository } from "typeorm";
 import { Appointment } from "@appointment/appointment.entity";
 import { randomInt } from "node:crypto";
 import { CreateAppointmentParams } from "@appointment/appointment.type";
+import { HttpError } from "@core/error";
 
 class AppointmentService {
   datasource: DataSource;
@@ -70,7 +71,7 @@ class AppointmentService {
     const maxMinutes: number = 60;
 
     if (peopleAhead < 0) {
-      throw new Error("Num people ahead should be >= 0");
+      throw new HttpError(500, `Num people ahead should be >= 0`);
     }
 
     if (peopleAhead === 0) {
@@ -109,7 +110,7 @@ class AppointmentService {
     const appointment = appointments[position];
 
     if (!appointment) {
-      throw new Error("Invalid Appointment");
+      throw new HttpError(404, `Invalid Appointment`);
     }
 
     const extension = this.calculateMillisExtension(position);
@@ -144,7 +145,7 @@ class AppointmentService {
     });
 
     if (!isValid) {
-      throw new Error(`Appointment with pin:${pin} is invalid`);
+      throw new HttpError(404, `Appointment with pin: ${pin} is invalid`);
     }
 
     const updatedDoc = await this.appointmentRepository.findOneAndUpdate(
