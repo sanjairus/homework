@@ -1,6 +1,7 @@
 import { inspect } from "node:util";
 import "./config";
 import express from "express";
+import initDatasource from "@database/client";
 
 const PORT = process.env.SERVER_PORT;
 
@@ -8,6 +9,8 @@ const app = express();
 
 async function initServer() {
   try {
+    const datasource = await initDatasource();
+
     app.use(express.json());
     app.use(express.urlencoded({ extended: true }));
     app.listen(PORT, () => {
