@@ -12,7 +12,9 @@ class AppointmenRouter extends BaseRouter {
 
     this.datasource = datasource;
     this.service = new AppointmentService(datasource);
+
     this.addGetRoute("/", this.getAppointments);
+    this.addPostRoute("/", this.createAppointment);
   }
 
   public getAppointments = async (request: Request, response: Response) => {
@@ -22,6 +24,19 @@ class AppointmenRouter extends BaseRouter {
 
     console.log("End of AppointmentRouter: getAppointments");
     return response.status(200).json({ appointments });
+  };
+
+  public createAppointment = async (request: Request, response: Response) => {
+    console.log("Start of AppointmentRouter: createAppointment");
+
+    const rawSchedule = request.body.schedule || new Date().toUTCString();
+
+    const schedule = new Date(rawSchedule);
+
+    const appointment = await this.service.createAppointment(schedule);
+
+    console.log("End of AppointmentRouter: createAppointment");
+    return response.status(200).json({ appointment });
   };
 }
 
