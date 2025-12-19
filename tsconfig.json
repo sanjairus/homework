@@ -20,6 +20,9 @@
 
     // Decorator related
     "emitDecoratorMetadata": true,
-    "experimentalDecorators": true
+    "experimentalDecorators": true,
+    "paths": {
+      "@database/*": ["src/database/*"]
+    }
   }
 }
