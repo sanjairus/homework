@@ -2,6 +2,7 @@ import BaseRouter from "@core/router";
 import { DataSource } from "typeorm";
 import AppointmentService from "@appointment/appointment.service";
 import { Request, Response } from "express";
+import { CreateAppointmentParams } from "./appointment.type";
 
 class AppointmenRouter extends BaseRouter {
   datasource: DataSource;
@@ -34,7 +35,18 @@ class AppointmenRouter extends BaseRouter {
 
     const schedule = new Date(rawSchedule);
 
-    const appointment = await this.service.createAppointment(schedule);
+    const customerEmail = request.body.customerEmail;
+    const customerPhone = request.body.customerPhone;
+    const customerName = request.body.customerName;
+
+    const params: CreateAppointmentParams = {
+      schedule,
+      customerEmail,
+      customerName,
+      customerPhone,
+    };
+
+    const appointment = await this.service.createAppointment(params);
 
     console.log("End of AppointmentRouter: createAppointment");
     return response.status(200).json({ appointment });
