@@ -2,6 +2,7 @@ import { inspect } from "node:util";
 import "./config";
 import express from "express";
 import initDatasource from "@database/client";
+import AppointmenRouter from "@appointment/appointment.router";
 
 const PORT = process.env.SERVER_PORT;
 
@@ -13,6 +14,10 @@ async function initServer() {
 
     app.use(express.json());
     app.use(express.urlencoded({ extended: true }));
+
+    // custom routes
+    app.use("/appointments", new AppointmenRouter(datasource).getRouter());
+
     app.listen(PORT, () => {
       console.log(`Listening to PORT:${PORT}`);
     });
