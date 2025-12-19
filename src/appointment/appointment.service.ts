@@ -17,6 +17,11 @@ class AppointmentService {
     console.log("Start of AppointmentService: findAppointments");
 
     const appointments = await this.appointmentRepository.find({
+      where: {
+        schedule: {
+          $gt: new Date(),
+        },
+      },
       order: {
         schedule: 1,
       },
