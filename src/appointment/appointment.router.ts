@@ -15,6 +15,7 @@ class AppointmenRouter extends BaseRouter {
 
     this.addGetRoute("/", this.getAppointments);
     this.addPostRoute("/", this.createAppointment);
+    this.addPostRoute("/validate", this.validateAppointment);
   }
 
   public getAppointments = async (request: Request, response: Response) => {
@@ -37,6 +38,19 @@ class AppointmenRouter extends BaseRouter {
 
     console.log("End of AppointmentRouter: createAppointment");
     return response.status(200).json({ appointment });
+  };
+
+  public validateAppointment = async (request: Request, response: Response) => {
+    console.log("Start of AppointmentRouter: validateAppointment");
+
+    const pin = request.body.pin;
+
+    const appointment = await this.service.validateAppointment(pin);
+
+    console.log("End of AppointmentRouter: validateAppointment");
+    return response.status(200).json({
+      appointment,
+    });
   };
 }
 
