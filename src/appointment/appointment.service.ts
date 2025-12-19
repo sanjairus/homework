@@ -64,7 +64,7 @@ class AppointmentService {
   }
 
   private calculateMillisExtension(peopleAhead: number) {
-    console.log("Start of AppointmentService: calculateTimeExtension");
+    console.log("Start of AppointmentService: calculateMillisExtension");
 
     // amount of time a unit of work needs to be processed
     const baseMinutes: number = 5;
@@ -92,7 +92,7 @@ class AppointmentService {
 
     const extension = baseMs * Math.pow(multiplier, peopleAhead);
 
-    console.log("End of AppointmentService: calculateTimeExtension");
+    console.log("End of AppointmentService: calculateMillisExtension");
 
     return Math.min(extension, maxMs);
   }
