@@ -23,7 +23,8 @@
     "emitDecoratorMetadata": true,
     "experimentalDecorators": true,
     "paths": {
-      "@database/*": ["src/database/*"]
+      "@database/*": ["src/database/*"],
+      "@core/*": ["src/core/*"]
     }
   }
 }
