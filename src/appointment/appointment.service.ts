@@ -18,10 +18,21 @@ class AppointmentService {
   async findAppointments() {
     console.log("Start of AppointmentService: findAppointments");
 
+    // Only fetch appointments for today's date
+
+    const today = new Date();
+
+    const start = new Date(today);
+    start.setHours(0, 0, 0, 0);
+
+    const end = new Date(today);
+    end.setHours(23, 59, 59, 999);
+
     const appointments = await this.appointmentRepository.find({
       where: {
         schedule: {
-          $gt: new Date(),
+          $gt: start,
+          $lt: end,
         },
       },
       order: {
@@ -100,10 +111,21 @@ class AppointmentService {
   async validateAppointment(pin: string) {
     console.log("Start of AppointmentService: validateAppointment");
 
+    // Only fetch appointments for today's date
+
+    const today = new Date();
+
+    const start = new Date(today);
+    start.setHours(0, 0, 0, 0);
+
+    const end = new Date(today);
+    end.setHours(23, 59, 59, 999);
+
     const appointments = await this.appointmentRepository.find({
       where: {
         schedule: {
-          $gt: new Date(),
+          $gt: start,
+          $lt: end,
         },
       },
       order: {
