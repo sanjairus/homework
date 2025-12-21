@@ -78,13 +78,13 @@ class AppointmentService {
     console.log("Start of AppointmentService: calculateMillisExtension");
 
     // amount of time a unit of work needs to be processed
-    const baseMinutes: number = 5;
+    const baseMinutes: number = 10;
 
     // value between 1 and 1.5, so that things don't escalate too quickly
     const multiplier: number = 1.3;
 
     // maximum amount of time that we can use as an extension (we can change this to whatever is realistic relative to the task)
-    const maxMinutes: number = 60;
+    const maxMinutes: number = 30;
 
     if (peopleAhead < 0) {
       throw new HttpError(500, `Num people ahead should be >= 0`);
