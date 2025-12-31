@@ -77,10 +77,12 @@ class AppointmentService {
   private calculateMillisExtension(peopleAhead: number) {
     console.log("Start of AppointmentService: calculateMillisExtension");
 
-    // amount of time a unit of work needs to be processed
+    // amount of time a unit of work needs to be processed (in minutes)
     const baseMinutes: number = 10;
 
     // value between 1 and 1.5, so that things don't escalate too quickly
+    // 1.3 here so when we multiply it with a number, we get 100% of the original value + 30% of it
+    // will exponentially rise but not too drastically
     const multiplier: number = 1.3;
 
     // maximum amount of time that we can use as an extension (we can change this to whatever is realistic relative to the task)
@@ -133,14 +135,14 @@ class AppointmentService {
       },
     });
 
-    const position = appointments.findIndex((e) => e.pin === pin);
-    const appointment = appointments[position];
+    const index = appointments.findIndex((e) => e.pin === pin);
+    const appointment = appointments[index];
 
     if (!appointment) {
       throw new HttpError(404, `Invalid Appointment`);
     }
 
-    const extension = this.calculateMillisExtension(position);
+    const extension = this.calculateMillisExtension(index);
 
     const schedule = appointment.schedule;
     const time = schedule.getTime();
@@ -167,7 +169,7 @@ class AppointmentService {
 
     console.log({
       appointments,
-      position,
+      position: index,
       extensionInMinutes: extension / 1000 / 60,
     });
 
